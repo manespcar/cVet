@@ -7,4 +7,6 @@ public interface UsuariosService {
 	public Usuarios checkLogin(String usuario, String password);
 
 	public Usuarios getUserById(Integer id);
+
+	public Usuarios saveUser(Usuarios usuario);
 }

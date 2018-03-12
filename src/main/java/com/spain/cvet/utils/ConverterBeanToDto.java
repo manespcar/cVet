@@ -16,4 +16,14 @@ public class ConverterBeanToDto {
 		return dto;
 	}
 
+	public static Usuarios convertUsuariosDtoToUsuarios(UsuariosDto dto) {
+		Usuarios bean = new Usuarios();
+		bean.setId(dto.getId());
+		bean.setNombreCompleto(dto.getNombreCompleto());
+		bean.setDireccion(dto.getDireccion());
+		bean.setTelefono(dto.getTelefono());
+		bean.setEmail(dto.getEmail());
+		return bean;
+	}
+
 }
