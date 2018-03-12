@@ -1,6 +1,10 @@
 package com.spain.cvet.service;
 
+import com.spain.cvet.model.Usuarios;
+
 public interface UsuariosService {
 
-	public boolean checkLogin(String usuario, String password);
+	public Usuarios checkLogin(String usuario, String password);
+
+	public Usuarios getUserById(Integer id);
 }

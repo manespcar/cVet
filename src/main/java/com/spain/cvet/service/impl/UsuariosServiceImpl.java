@@ -14,13 +14,15 @@ public class UsuariosServiceImpl implements UsuariosService {
 	private UsuariosRepository usuariosRepository;
 	
 	@Override
-	public boolean checkLogin(String usuario, String password) {
-		boolean exist = false;
+	public Usuarios checkLogin(String usuario, String password) {
 		Usuarios usuarioBBDD = usuariosRepository.findByLogin(usuario, password);
-		if(usuarioBBDD != null){
-			exist = true;
-		}
-		return exist;
+		usuarioBBDD.setPassword(null);
+		return usuarioBBDD;
+	}
+
+	@Override
+	public Usuarios getUserById(Integer id) {
+		return usuariosRepository.getOne(id);
 	}
 
 }
