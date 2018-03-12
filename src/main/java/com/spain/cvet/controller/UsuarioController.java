@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spain.cvet.dto.UsuariosDto;
 import com.spain.cvet.model.Usuarios;
 import com.spain.cvet.service.UsuariosService;
+import com.spain.cvet.utils.ConverterBeanToDto;
 
 @RestController
 @RequestMapping("/usuario/")
@@ -19,12 +21,15 @@ public class UsuarioController {
 	private UsuariosService usuariosService;
 	
 	@GetMapping(path = "{id}")
-	public ResponseEntity<Usuarios> getUserById(@PathVariable Integer id) throws Exception {
+	public ResponseEntity<UsuariosDto> getUserById(@PathVariable Integer id) throws Exception {
+		UsuariosDto dto = null;
 		Usuarios usuario = usuariosService.getUserById(id);
-		if(usuario != null)
-			return new ResponseEntity<Usuarios>(usuario, HttpStatus.OK);
+		if(usuario != null){
+			dto = ConverterBeanToDto.convertUsuariosToUsuariosDto(usuario);
+			return new ResponseEntity<UsuariosDto>(dto, HttpStatus.OK);
+		}
 		else
-			return new ResponseEntity<Usuarios>(usuario, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<UsuariosDto>(dto, HttpStatus.NOT_FOUND);
 	}
 
 }

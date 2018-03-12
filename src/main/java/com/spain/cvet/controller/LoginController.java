@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spain.cvet.dto.UsuariosDto;
 import com.spain.cvet.model.Usuarios;
 import com.spain.cvet.service.UsuariosService;
+import com.spain.cvet.utils.ConverterBeanToDto;
 
 @RestController
 @RequestMapping("/login/")
@@ -19,12 +21,15 @@ public class LoginController {
 	private UsuariosService usuariosService;
 	
 	@PostMapping(value = "check")
-	public ResponseEntity<Usuarios> login(@RequestBody Usuarios user) throws Exception {
+	public ResponseEntity<UsuariosDto> login(@RequestBody Usuarios user) throws Exception {
+		UsuariosDto dto = null;
 		Usuarios usuario = usuariosService.checkLogin(user.getUsuario(), user.getPassword());
-		if(usuario != null)
-			return new ResponseEntity<Usuarios>(usuario, HttpStatus.OK);
+		if(usuario != null){
+			dto = ConverterBeanToDto.convertUsuariosToUsuariosDto(usuario);
+			return new ResponseEntity<UsuariosDto>(dto, HttpStatus.OK);
+		}
 		else
-			return new ResponseEntity<Usuarios>(usuario, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<UsuariosDto>(dto, HttpStatus.NOT_FOUND);
 	}
 
 }
