@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mascotas")
+@Table(catalog = "cv_bixos_pro", name = "mascotas")
 public class Mascotas implements Serializable{
 
 	private static final long serialVersionUID = -1301566799619146625L;
@@ -33,8 +33,13 @@ public class Mascotas implements Serializable{
 	@Column(name = "sexo")
 	private String sexo;
 	
-	@Column(name = "raza")
-	private String raza;
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "raza")
+	private Razas raza;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "especie")
+	private Especie especie;
 	
 	@Column(name = "capa")
 	private String capa;
@@ -42,9 +47,8 @@ public class Mascotas implements Serializable{
 	@Column(name = "fecha_nacimiento")
 	private Date fechaNacimiento;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-	private Usuarios usuarios;
+	@Column(name = "cliente_id")
+	private Integer clienteId;
 
 	public Integer getId() {
 		return id;
@@ -78,12 +82,20 @@ public class Mascotas implements Serializable{
 		this.sexo = sexo;
 	}
 
-	public String getRaza() {
+	public Razas getRaza() {
 		return raza;
 	}
 
-	public void setRaza(String raza) {
+	public void setRaza(Razas raza) {
 		this.raza = raza;
+	}
+
+	public Especie getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(Especie especie) {
+		this.especie = especie;
 	}
 
 	public String getCapa() {
@@ -102,18 +114,19 @@ public class Mascotas implements Serializable{
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Usuarios getUsuarios() {
-		return usuarios;
+	public Integer getClienteId() {
+		return clienteId;
 	}
 
-	public void setUsuarios(Usuarios usuarios) {
-		this.usuarios = usuarios;
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
 	}
 
 	@Override
 	public String toString() {
 		return "Mascotas [id=" + id + ", nombre=" + nombre + ", chip=" + chip + ", sexo=" + sexo + ", raza=" + raza
-				+ ", capa=" + capa + ", fechaNacimiento=" + fechaNacimiento + ", usuarios=" + usuarios + "]";
+				+ ", especie=" + especie + ", capa=" + capa + ", fechaNacimiento=" + fechaNacimiento + ", clienteId="
+				+ clienteId + "]";
 	}
 
 	@Override
@@ -122,12 +135,13 @@ public class Mascotas implements Serializable{
 		int result = 1;
 		result = prime * result + ((capa == null) ? 0 : capa.hashCode());
 		result = prime * result + ((chip == null) ? 0 : chip.hashCode());
+		result = prime * result + ((clienteId == null) ? 0 : clienteId.hashCode());
+		result = prime * result + ((especie == null) ? 0 : especie.hashCode());
 		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((raza == null) ? 0 : raza.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
-		result = prime * result + ((usuarios == null) ? 0 : usuarios.hashCode());
 		return result;
 	}
 
@@ -149,6 +163,16 @@ public class Mascotas implements Serializable{
 			if (other.chip != null)
 				return false;
 		} else if (!chip.equals(other.chip))
+			return false;
+		if (clienteId == null) {
+			if (other.clienteId != null)
+				return false;
+		} else if (!clienteId.equals(other.clienteId))
+			return false;
+		if (especie == null) {
+			if (other.especie != null)
+				return false;
+		} else if (!especie.equals(other.especie))
 			return false;
 		if (fechaNacimiento == null) {
 			if (other.fechaNacimiento != null)
@@ -174,11 +198,6 @@ public class Mascotas implements Serializable{
 			if (other.sexo != null)
 				return false;
 		} else if (!sexo.equals(other.sexo))
-			return false;
-		if (usuarios == null) {
-			if (other.usuarios != null)
-				return false;
-		} else if (!usuarios.equals(other.usuarios))
 			return false;
 		return true;
 	}

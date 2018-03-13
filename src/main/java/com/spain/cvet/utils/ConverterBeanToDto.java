@@ -39,7 +39,7 @@ public class ConverterBeanToDto {
 		dto.setFechaNacimiento(sdf.format(mascota.getFechaNacimiento()));
 		dto.setId(mascota.getId());
 		dto.setNombre(mascota.getNombre());
-		dto.setRaza(mascota.getRaza());
+		dto.setRaza(mascota.getRaza().getNombre());
 		dto.setSexo(mascota.getSexo());
 		return dto;
 	}
