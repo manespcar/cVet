@@ -49,6 +49,9 @@ public class Mascotas implements Serializable{
 	
 	@Column(name = "cliente_id")
 	private Integer clienteId;
+	
+	@Column(name = "fecha_baja")
+	private Date fechaBaja;
 
 	public Integer getId() {
 		return id;
@@ -122,11 +125,19 @@ public class Mascotas implements Serializable{
 		this.clienteId = clienteId;
 	}
 
+	public Date getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+
 	@Override
 	public String toString() {
 		return "Mascotas [id=" + id + ", nombre=" + nombre + ", chip=" + chip + ", sexo=" + sexo + ", raza=" + raza
 				+ ", especie=" + especie + ", capa=" + capa + ", fechaNacimiento=" + fechaNacimiento + ", clienteId="
-				+ clienteId + "]";
+				+ clienteId + ", fechaBaja=" + fechaBaja + "]";
 	}
 
 	@Override
@@ -137,6 +148,7 @@ public class Mascotas implements Serializable{
 		result = prime * result + ((chip == null) ? 0 : chip.hashCode());
 		result = prime * result + ((clienteId == null) ? 0 : clienteId.hashCode());
 		result = prime * result + ((especie == null) ? 0 : especie.hashCode());
+		result = prime * result + ((fechaBaja == null) ? 0 : fechaBaja.hashCode());
 		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
@@ -173,6 +185,11 @@ public class Mascotas implements Serializable{
 			if (other.especie != null)
 				return false;
 		} else if (!especie.equals(other.especie))
+			return false;
+		if (fechaBaja == null) {
+			if (other.fechaBaja != null)
+				return false;
+		} else if (!fechaBaja.equals(other.fechaBaja))
 			return false;
 		if (fechaNacimiento == null) {
 			if (other.fechaNacimiento != null)

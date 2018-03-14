@@ -12,7 +12,7 @@ import com.spain.cvet.model.Mascotas;
 @Repository
 public interface MascotasRepository extends JpaRepository<Mascotas, Integer> {
 	
-	@Query("SELECT m FROM Mascotas m WHERE m.clienteId = :usuarioId")
+	@Query("SELECT m FROM Mascotas m WHERE m.clienteId = :usuarioId AND m.fechaBaja is null ORDER BY m.nombre")
 	public List<Mascotas> recuperarMascotasByUsuarioId(@Param("usuarioId") Integer usuarioId);
 
 }

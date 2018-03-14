@@ -41,6 +41,9 @@ public class Usuarios implements Serializable {
 
 	@Column(name = "fecha_cambio")
 	private Date fechaCambio;
+	
+	@Column(name = "imagen")
+	private String imagen;
 
 	public Integer getId() {
 		return id;
@@ -106,6 +109,21 @@ public class Usuarios implements Serializable {
 		this.email = email;
 	}
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuarios [id=" + id + ", usuario=" + usuario + ", password=" + password + ", nombreCompleto="
+				+ nombreCompleto + ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email
+				+ ", fechaCambio=" + fechaCambio + ", imagen=" + imagen + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,6 +132,7 @@ public class Usuarios implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fechaCambio == null) ? 0 : fechaCambio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
 		result = prime * result + ((nombreCompleto == null) ? 0 : nombreCompleto.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
@@ -150,6 +169,11 @@ public class Usuarios implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (imagen == null) {
+			if (other.imagen != null)
+				return false;
+		} else if (!imagen.equals(other.imagen))
+			return false;
 		if (nombreCompleto == null) {
 			if (other.nombreCompleto != null)
 				return false;
@@ -171,13 +195,6 @@ public class Usuarios implements Serializable {
 		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuarios [id=" + id + ", usuario=" + usuario + ", password=" + password + ", nombreCompleto="
-				+ nombreCompleto + ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email
-				+ ", fechaCambio=" + fechaCambio + "]";
 	}
 
 }

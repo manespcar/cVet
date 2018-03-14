@@ -15,6 +15,10 @@ public class MascotasDto {
 	private String capa;
 	
 	private String fechaNacimiento;
+	
+	private String especie;
+	
+	private String imagen;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +74,22 @@ public class MascotasDto {
 
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getEspecie() {
+		return especie;
+	}
+
+	public void setEspecie(String especie) {
+		this.especie = especie;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 	
 }

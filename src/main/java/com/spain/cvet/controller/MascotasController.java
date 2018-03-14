@@ -27,14 +27,10 @@ public class MascotasController {
 	public ResponseEntity<List<MascotasDto>> getUserById(@PathVariable Integer id) throws Exception {
 		List<MascotasDto> dtos = new ArrayList<>();
 		List<Mascotas> mascotas = mascotasService.recuperarMascotasDeUsuario(id);
-		if(mascotas != null){
-			for (Mascotas mascota : mascotas) {
-				dtos.add(ConverterBeanToDto.convertMascotasToMascotasDto(mascota));
-			}
-			return new ResponseEntity<List<MascotasDto>>(dtos, HttpStatus.OK);
+		for (Mascotas mascota : mascotas) {
+			dtos.add(ConverterBeanToDto.convertMascotasToMascotasDto(mascota));
 		}
-		else
-			return new ResponseEntity<List<MascotasDto>>(dtos, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<MascotasDto>>(dtos, HttpStatus.OK);
 	}
 
 }

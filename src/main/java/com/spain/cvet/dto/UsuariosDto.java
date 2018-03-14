@@ -13,6 +13,8 @@ public class UsuariosDto {
 	private Integer telefono;
 	
 	private String email;
+	
+	private String imagen;
 
 	public Integer getId() {
 		return id;
@@ -60,6 +62,14 @@ public class UsuariosDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 }

@@ -2,6 +2,8 @@ package com.spain.cvet.utils;
 
 import java.text.SimpleDateFormat;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.spain.cvet.dto.MascotasDto;
 import com.spain.cvet.dto.UsuariosDto;
 import com.spain.cvet.model.Mascotas;
@@ -19,6 +21,7 @@ public class ConverterBeanToDto {
 		dto.setTelefono(bean.getTelefono());
 		dto.setEmail(bean.getEmail());
 		dto.setUsuario(bean.getUsuario());
+		dto.setImagen(bean.getImagen());
 		return dto;
 	}
 
@@ -34,13 +37,19 @@ public class ConverterBeanToDto {
 
 	public static MascotasDto convertMascotasToMascotasDto(Mascotas mascota) {
 		MascotasDto dto = new MascotasDto();
-		dto.setCapa(mascota.getCapa());
-		dto.setChip(mascota.getChip());
+		dto.setCapa(mascota.getCapa().toUpperCase());
+		dto.setChip(StringUtils.isEmpty(mascota.getChip()) ? "-" : mascota.getChip());
 		dto.setFechaNacimiento(sdf.format(mascota.getFechaNacimiento()));
 		dto.setId(mascota.getId());
-		dto.setNombre(mascota.getNombre());
-		dto.setRaza(mascota.getRaza().getNombre());
-		dto.setSexo(mascota.getSexo());
+		dto.setNombre(mascota.getNombre().toUpperCase());
+		dto.setRaza(mascota.getRaza().getNombre().toUpperCase());
+		dto.setSexo(mascota.getSexo().toUpperCase());
+		dto.setEspecie(mascota.getEspecie().getNombre());
+		if(mascota.getEspecie().getId() == 1){ //perro
+			dto.setImagen("assets/imgs/dog.png");
+		} else if (mascota.getEspecie().getId() == 2){ //gato
+			dto.setImagen("assets/imgs/cat.png");
+		}
 		return dto;
 	}
 
