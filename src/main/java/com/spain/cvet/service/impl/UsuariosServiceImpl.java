@@ -14,14 +14,6 @@ public class UsuariosServiceImpl implements UsuariosService {
 	
 	@Autowired
 	private UsuariosRepository usuariosRepository;
-	
-	@Override
-	public Usuarios checkLogin(String usuario, String password) {
-		Usuarios usuarioBBDD = usuariosRepository.findByLogin(usuario, password);
-		if(usuarioBBDD != null)
-			usuarioBBDD.setPassword(null);
-		return usuarioBBDD;
-	}
 
 	@Override
 	public Usuarios getUserById(Integer id) {

@@ -19,11 +19,17 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-public class LoginFilter extends AbstractAuthenticationProcessingFilter {
+import com.spain.cvet.model.Usuarios;
+import com.spain.cvet.service.UsuariosService;
 
-	public LoginFilter(String url, AuthenticationManager authManager) {
+public class LoginFilter extends AbstractAuthenticationProcessingFilter {
+	
+	private UsuariosService usuariosService;
+
+	public LoginFilter(String url, AuthenticationManager authManager, UsuariosService usuariosService) {
 		super(new AntPathRequestMatcher(url));
 		setAuthenticationManager(authManager);
+		this.usuariosService = usuariosService;
 	}
 
 	@Override
@@ -39,8 +45,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	    }
 	    String data = buffer.toString();
 
-		// Asumimos que el body tendrá el siguiente JSON {"username":"ask",
-		// "password":"123"}
+		// Asumimos que el body tendrá el siguiente JSON {"username":"ask", "password":"123"}
 		// Realizamos un mapeo a nuestra clase User para tener ahi los datos
 	    JSONObject json = null;
 	    try {
@@ -62,9 +67,15 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
+		String username = auth.getName();
 
 		// Si la autenticacion fue exitosa, agregamos el token a la respuesta
-		JwtUtil.addAuthentication(res, auth.getName());
+		JwtUtil.addAuthentication(res, username, getIdByUsername(username));
+	}
+	
+	private String getIdByUsername(String username){
+		Usuarios usuario = usuariosService.getUserByUsername(username);
+		return String.valueOf(usuario.getId());
 	}
 
 	class User {
