@@ -18,7 +18,8 @@ public class UsuariosServiceImpl implements UsuariosService {
 	@Override
 	public Usuarios checkLogin(String usuario, String password) {
 		Usuarios usuarioBBDD = usuariosRepository.findByLogin(usuario, password);
-		usuarioBBDD.setPassword(null);
+		if(usuarioBBDD != null)
+			usuarioBBDD.setPassword(null);
 		return usuarioBBDD;
 	}
 
