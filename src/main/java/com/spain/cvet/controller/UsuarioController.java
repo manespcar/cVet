@@ -22,10 +22,10 @@ public class UsuarioController {
 	@Autowired
 	private UsuariosService usuariosService;
 	
-	@GetMapping(path = "{id}")
-	public ResponseEntity<UsuariosDto> getUserById(@PathVariable Integer id) throws Exception {
+	@GetMapping(path = "{username}")
+	public ResponseEntity<UsuariosDto> getUserById(@PathVariable String username) throws Exception {
 		UsuariosDto dto = null;
-		Usuarios usuario = usuariosService.getUserById(id);
+		Usuarios usuario = usuariosService.getUserAndClienteByUsername(username);
 		if(usuario != null){
 			dto = ConverterBeanToDto.convertUsuariosToUsuariosDto(usuario);
 			return new ResponseEntity<UsuariosDto>(dto, HttpStatus.OK);

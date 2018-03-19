@@ -19,17 +19,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.spain.cvet.model.Usuarios;
-import com.spain.cvet.service.UsuariosService;
-
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	
-	private UsuariosService usuariosService;
-
-	public LoginFilter(String url, AuthenticationManager authManager, UsuariosService usuariosService) {
+	public LoginFilter(String url, AuthenticationManager authManager) {
 		super(new AntPathRequestMatcher(url));
 		setAuthenticationManager(authManager);
-		this.usuariosService = usuariosService;
 	}
 
 	@Override
@@ -70,12 +64,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 		String username = auth.getName();
 
 		// Si la autenticacion fue exitosa, agregamos el token a la respuesta
-		JwtUtil.addAuthentication(res, username, getIdByUsername(username));
-	}
-	
-	private String getIdByUsername(String username){
-		Usuarios usuario = usuariosService.getUserByUsername(username);
-		return String.valueOf(usuario.getId());
+		JwtUtil.addAuthentication(res, username);
 	}
 
 	class User {

@@ -23,10 +23,10 @@ public class MascotasController {
 	@Autowired
 	private MascotasService mascotasService;
 	
-	@GetMapping(path = "usuario/{id}")
-	public ResponseEntity<List<MascotasDto>> getUserById(@PathVariable Integer id) throws Exception {
+	@GetMapping(path = "usuario/{username}")
+	public ResponseEntity<List<MascotasDto>> getUserById(@PathVariable String username) throws Exception {
 		List<MascotasDto> dtos = new ArrayList<>();
-		List<Mascotas> mascotas = mascotasService.recuperarMascotasDeUsuario(id);
+		List<Mascotas> mascotas = mascotasService.recuperarMascotasDeUsuario(username);
 		for (Mascotas mascota : mascotas) {
 			dtos.add(ConverterBeanToDto.convertMascotasToMascotasDto(mascota));
 		}

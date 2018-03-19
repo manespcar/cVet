@@ -2,34 +2,24 @@ package com.spain.cvet.dto;
 
 public class UsuariosDto {
 	
-	private Integer id;
-
-	private String usuario;
+	private String username;
 
 	private String nombreCompleto;
 	
 	private String direccion;
 	
-	private Integer telefono;
+	private String telefono;
 	
 	private String email;
 	
 	private String imagen;
 
-	public Integer getId() {
-		return id;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getNombreCompleto() {
@@ -48,11 +38,11 @@ public class UsuariosDto {
 		this.direccion = direccion;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

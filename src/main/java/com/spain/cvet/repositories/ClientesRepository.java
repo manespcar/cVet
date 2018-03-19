@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.spain.cvet.model.Usuarios;
+import com.spain.cvet.model.Clientes;
 
 @Repository
-public interface UsuariosRepository extends JpaRepository<Usuarios, String> {
+public interface ClientesRepository extends JpaRepository<Clientes, Integer> {
 	
-	@Query("SELECT u FROM Usuarios u WHERE u.usuario = :username")
-	public Usuarios findByUsername(@Param("username") String username);
+	@Query("SELECT c FROM Clientes c WHERE c.id= :id")
+	public Clientes getById(@Param("id") Integer id);
 
 }

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.spain.cvet.dto.MascotasDto;
 import com.spain.cvet.dto.UsuariosDto;
+import com.spain.cvet.model.Clientes;
 import com.spain.cvet.model.Mascotas;
 import com.spain.cvet.model.Usuarios;
 
@@ -15,23 +16,25 @@ public class ConverterBeanToDto {
 	
 	public static UsuariosDto convertUsuariosToUsuariosDto(Usuarios bean){
 		UsuariosDto dto = new UsuariosDto();
-		dto.setId(bean.getId());
-		dto.setNombreCompleto(bean.getNombreCompleto());
-		dto.setDireccion(bean.getDireccion());
-		dto.setTelefono(bean.getTelefono());
-		dto.setEmail(bean.getEmail());
-		dto.setUsuario(bean.getUsuario());
+		dto.setNombreCompleto(bean.getCliente().getNombreCompleto());
+		dto.setDireccion(bean.getCliente().getDireccion());
+		dto.setTelefono(bean.getCliente().getTelefono());
+		dto.setEmail(bean.getCliente().getEmail());
+		dto.setUsername(bean.getUsuario());
 		dto.setImagen(bean.getImagen());
 		return dto;
 	}
 
 	public static Usuarios convertUsuariosDtoToUsuarios(UsuariosDto dto) {
 		Usuarios bean = new Usuarios();
-		bean.setId(dto.getId());
-		bean.setNombreCompleto(dto.getNombreCompleto());
-		bean.setDireccion(dto.getDireccion());
-		bean.setTelefono(dto.getTelefono());
-		bean.setEmail(dto.getEmail());
+		Clientes cliente = new Clientes();
+		cliente.setNombreCompleto(dto.getNombreCompleto());
+		cliente.setDireccion(dto.getDireccion());
+		cliente.setTelefono(dto.getTelefono());
+		cliente.setEmail(dto.getEmail());
+		bean.setUsuario(dto.getUsername());
+		bean.setCliente(cliente);
+		bean.setImagen(dto.getImagen());
 		return bean;
 	}
 
