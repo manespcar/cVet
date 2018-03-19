@@ -5,13 +5,16 @@ import java.text.SimpleDateFormat;
 import org.apache.commons.lang3.StringUtils;
 
 import com.spain.cvet.dto.MascotasDto;
+import com.spain.cvet.dto.RecordatoriosDto;
 import com.spain.cvet.dto.UsuariosDto;
 import com.spain.cvet.model.Clientes;
 import com.spain.cvet.model.Mascotas;
+import com.spain.cvet.model.Recordatorios;
 import com.spain.cvet.model.Usuarios;
 
 public class ConverterBeanToDto {
 	
+	private static final String GUION = "-";
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public static UsuariosDto convertUsuariosToUsuariosDto(Usuarios bean){
@@ -41,8 +44,8 @@ public class ConverterBeanToDto {
 	public static MascotasDto convertMascotasToMascotasDto(Mascotas mascota) {
 		MascotasDto dto = new MascotasDto();
 		dto.setCapa(mascota.getCapa().toUpperCase());
-		dto.setChip(StringUtils.isEmpty(mascota.getChip()) ? "-" : mascota.getChip());
-		dto.setFechaNacimiento(sdf.format(mascota.getFechaNacimiento()));
+		dto.setChip(StringUtils.isEmpty(mascota.getChip()) ? GUION : mascota.getChip());
+		dto.setFechaNacimiento(mascota.getFechaNacimiento() != null ? sdf.format(mascota.getFechaNacimiento()) : GUION);
 		dto.setId(mascota.getId());
 		dto.setNombre(mascota.getNombre().toUpperCase());
 		dto.setRaza(mascota.getRaza().getNombre().toUpperCase());
@@ -53,6 +56,14 @@ public class ConverterBeanToDto {
 		} else if (mascota.getEspecie().getId() == 2){ //gato
 			dto.setImagen("assets/imgs/cat.png");
 		}
+		return dto;
+	}
+
+	public static RecordatoriosDto convertRecordatoriosToRecordatoriosDto(Recordatorios recordatorio) {
+		RecordatoriosDto dto = new RecordatoriosDto();
+		dto.setVacuna(recordatorio.getVacunas().getNombre());
+		dto.setFechaVacunacion(recordatorio.getFechaVacunacion() != null ? sdf.format(recordatorio.getFechaVacunacion()) : GUION);
+		dto.setFechaProxVacunacion(recordatorio.getFechaProxVacunacion() != null ? sdf.format(recordatorio.getFechaProxVacunacion()) : GUION);
 		return dto;
 	}
 

@@ -19,11 +19,16 @@ public class MascotasServiceImpl implements MascotasService {
 	
 	@Autowired
 	private UsuariosService usuariosService;
-
+	
 	@Override
 	public List<Mascotas> recuperarMascotasDeUsuario(String username) {
 		Usuarios usuario = usuariosService.getUserByUsername(username);
 		return mascotasRepository.recuperarMascotasByUsuarioId(usuario.getClienteId());
+	}
+
+	@Override
+	public Mascotas recuperarInformacionDeMascota(Integer mascotaId) {
+		return mascotasRepository.getOne(mascotaId);
 	}
 
 }

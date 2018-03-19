@@ -1,5 +1,7 @@
 package com.spain.cvet.dto;
 
+import java.util.List;
+
 public class MascotasDto {
 	
 	private Integer id;
@@ -19,6 +21,8 @@ public class MascotasDto {
 	private String especie;
 	
 	private String imagen;
+	
+	private List<RecordatoriosDto> recordatorios;
 
 	public Integer getId() {
 		return id;
@@ -90,6 +94,14 @@ public class MascotasDto {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public List<RecordatoriosDto> getRecordatorios() {
+		return recordatorios;
+	}
+
+	public void setRecordatorios(List<RecordatoriosDto> recordatorios) {
+		this.recordatorios = recordatorios;
 	}
 	
 }
